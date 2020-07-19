@@ -6,8 +6,10 @@
     "android": "yarn run android:emulator & ( sleep 30 && react-native run-android )",
     "android:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_3_API_30 -wipe-data",
     "ios": "yarn run ios:emulator:erase && react-native run-ios --simulator='iPhone 11'",
-    "ios:emulator:erase": "xcrun simctl erase 7F323507-1FC7-4F43-AFE6-2C4186F0327A",
+    "ios:emulator:erase": "xcrun simctl erase 578300FE-B96A-4B24-A763-E06D8E11EAEB",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "npm run lint -- --fix",
+    "prettify": "prettier --write './**/*/*.{js,jsx,ts,tsx}'",
     "start": "react-native start",
     "test": "jest"
   },
