@@ -1,0 +1,37 @@
+Native feel while scrolling through infinite feed (feed is similar to one that FB has)
+
+In-app purchases
+
+responsive views
+
+Forms
+
+Native audio and video playback
+
+Background stopwatch
+
+Internationalization
+
+Deep linking
+
+Analytics and Crash reporting system (like GA and Crashlytics)
+
+SQLite or some other DB/Storage solution
+
+Native like navigation between screens
+
+Graphs & Charts (like D3.js has)
+
+Geolocation
+
+Firebase
+
+Tests
+
+
+https://github.com/prscX/awesome-react-native-native-modules
+https://github.com/jondot/awesome-react-native
+
+
+https://heartbeat.fritz.ai/getting-started-with-stack-navigator-using-react-navigation-5-in-react-native-and-expo-apps-4c516becaee1
+https://codeburst.io/react-native-navigation-patterns-9c2b6d15ddb3

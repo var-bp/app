@@ -1,0 +1,60 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "yarn run android:emulator & ( sleep 30 && react-native run-android )",
+    "android:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_3_API_30 -wipe-data",
+    "ios": "yarn run ios:emulator:erase && react-native run-ios --simulator='iPhone 11'",
+    "ios:emulator:erase": "xcrun simctl erase 7F323507-1FC7-4F43-AFE6-2C4186F0327A",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "start": "react-native start",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "5.7.1",
+    "@react-navigation/drawer": "5.8.5",
+    "@react-navigation/native": "5.7.0",
+    "@react-navigation/stack": "5.7.0",
+    "@reduxjs/toolkit": "1.4.0",
+    "react": "16.13.1",
+    "react-native": "0.63.1",
+    "react-native-gesture-handler": "1.6.1",
+    "react-native-reanimated": "1.9.0",
+    "react-native-safe-area-context": "3.1.1",
+    "react-native-screens": "2.9.0",
+    "react-redux": "7.2.0",
+    "styled-components": "5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.10.5",
+    "@babel/runtime": "7.10.5",
+    "@react-native-community/eslint-config": "2.0.0",
+    "@types/jest": "26.0.4",
+    "@types/react-native": "0.63.1",
+    "@types/react-redux": "7.1.9",
+    "@types/react-test-renderer": "16.9.2",
+    "@types/styled-components": "5.1.1",
+    "@typescript-eslint/eslint-plugin": "3.6.1",
+    "@typescript-eslint/parser": "3.6.1",
+    "babel-jest": "26.1.0",
+    "eslint": "7.4.0",
+    "jest": "26.1.0",
+    "metro-react-native-babel-preset": "0.60.0",
+    "prettier": "2.0.5",
+    "react-test-renderer": "16.13.1",
+    "typescript": "3.9.6"
+  }
+}
