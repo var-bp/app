@@ -9,6 +9,6 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const Text = styled.Text`
-  font-family: ${FontFamily[FontWeight.Light]};
-  font-weight: ${FontWeight.Light};
+  font-family: ${FontFamily[FontWeight.Normal]};
+  font-weight: ${FontWeight.Normal};
 `;
