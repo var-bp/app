@@ -1,8 +1,9 @@
-import React from 'react';
-import {Text, Button} from 'react-native';
-import {Container} from './Feed.styles';
+import React, {FunctionComponent} from 'react';
+import {Button} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {Container, Text} from './Feed.styles';
 
-const Feed = ({navigation}) => {
+const Feed: FunctionComponent<StackScreenProps<any, any>> = ({navigation}) => {
   return (
     <Container>
       <Text>Feed</Text>

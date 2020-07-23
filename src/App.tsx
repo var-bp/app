@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DrawerActions} from '@react-navigation/native'; // https://github.com/react-navigation/react-navigation/issues/6790
 import {createStackNavigator} from '@react-navigation/stack';
 import {
+  DrawerContentComponentProps,
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
@@ -12,6 +13,7 @@ import {
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
 import {authFetched, resetState} from './store/auth/slice';
+import {State} from './store/types';
 import ContactsScreen from './screens/Contacts';
 import SignInScreen from './screens/SignIn';
 import SignUpScreen from './screens/SignUp';
@@ -59,7 +61,7 @@ const Home = () => (
 );
 
 const App = () => {
-  const isSignedIn = useSelector((state) => state.auth.data);
+  const isSignedIn = useSelector((state: State) => state.auth.data);
 
   const dispatch = useDispatch();
 
@@ -67,12 +69,12 @@ const App = () => {
     dispatch(authFetched());
   }, [dispatch]);
 
-  const handleSignOut = ({navigation}) => () => {
-    navigation.closeDrawer();
+  const handleSignOut = ({navigation}: DrawerContentComponentProps) => () => {
+    navigation.dispatch(DrawerActions.closeDrawer());
     dispatch(resetState());
   };
 
-  const drawerContent = (props) => {
+  const drawerContent = (props: DrawerContentComponentProps) => {
     return (
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
