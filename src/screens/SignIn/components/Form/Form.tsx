@@ -23,7 +23,7 @@ const Form = () => {
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   };
-  const renderUserName = ({onChange, onBlur, value}: RenderFn) => (
+  const renderUsername = ({onChange, onBlur, value}: RenderFn) => (
     <TextInput
       onBlur={onBlur}
       onChangeText={onChange}
@@ -47,15 +47,15 @@ const Form = () => {
         <Icon name="user" size={100} color={Black[2]} />
       </User>
       <Row height="90px">
-        <Label>User name</Label>
+        <Label>Username</Label>
         <Controller
           control={control}
-          render={renderUserName}
-          name="firstName"
+          render={renderUsername}
+          name="username"
           rules={rules}
           defaultValue=""
         />
-        {errors.firstName && <RequiredText>Required</RequiredText>}
+        {errors.username && <RequiredText>Required</RequiredText>}
       </Row>
       <Row height="85px">
         <Label>Password</Label>
@@ -66,7 +66,7 @@ const Form = () => {
           rules={rules}
           defaultValue=""
         />
-        {errors.firstName && <RequiredText>Required</RequiredText>}
+        {errors.password && <RequiredText>Required</RequiredText>}
       </Row>
       <Row marginBottom="40px" alignItems="flex-end">
         <Link onPress={() => {}}>Forgot Password?</Link>

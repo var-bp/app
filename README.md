@@ -7,4 +7,4 @@ https://medium.com/@rossbulat/react-native-working-with-error-boundaries-2ac2139
 
 https://medium.com/@rossbulat/react-native-form-management-an-introduction-cb360187d053
 
-When to use TouchableNativeFeedback, TouchableHighlight or TouchableOpacity: https://stackoverflow.com/a/46075892
+https://magento.github.io/pwa-studio/venia-pwa-concept/component/forgot-password/
