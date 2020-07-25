@@ -1,10 +1,15 @@
 import React from 'react';
-import {Button} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import TextInput from '../../../../shared/TextInput';
-import {Black} from '../../../../helpers/colors';
-import Icon from '../../../../shared/Icon';
-import {Container, User, Row, RequiredText} from './Form.styles';
+import {
+  Button,
+  Label,
+  Link,
+  TextInput,
+  RequiredText,
+  Icon,
+} from '../../../../shared';
+import {Black, Blue, Yellow} from '../../../../helpers/colors';
+import {Container, User, Row} from './Form.styles';
 
 const Form = () => {
   const {control, handleSubmit, errors} = useForm();
@@ -13,9 +18,10 @@ const Form = () => {
   return (
     <Container>
       <User>
-        <Icon name="user" size={100} color={Black[1]} />
+        <Icon name="user" size={100} color={Black[2]} />
       </User>
-      <Row>
+      <Row height="90px">
+        <Label>User name</Label>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -23,7 +29,7 @@ const Form = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="User name"
+              autoCompleteType="username"
             />
           )}
           name="firstName"
@@ -32,8 +38,8 @@ const Form = () => {
         />
         {errors.firstName && <RequiredText>Required</RequiredText>}
       </Row>
-
-      <Row>
+      <Row height="90px">
+        <Label>Password</Label>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -41,17 +47,32 @@ const Form = () => {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              placeholder="Last name"
+              secureTextEntry
+              autoCompleteType="password"
             />
           )}
-          name="lastName"
+          name="password"
           rules={{required: true}}
           defaultValue=""
         />
         {errors.firstName && <RequiredText>Required</RequiredText>}
       </Row>
-
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Row marginBottom="40px" alignItems="flex-end">
+        <Link title="Forgot Password?" onPress={() => {}} />
+      </Row>
+      <Row marginBottom="35px">
+        <Button
+          title="Login"
+          backgroundColor={Blue[1]}
+          onPress={handleSubmit(onSubmit)}
+        />
+      </Row>
+      <Button
+        title="No account yet? Signup now"
+        backgroundColor={Yellow[1]}
+        color={Black[2]}
+        onPress={() => {}}
+      />
     </Container>
   );
 };
