@@ -21,7 +21,7 @@ import SettingsScreen from './screens/Settings';
 import FeedScreen from './screens/Feed';
 import DetailsScreen from './screens/Details';
 import ProfileScreen from './screens/Profile';
-import ResetPasswordScreen from './screens/ResetPassword';
+import ForgotPasswordScreen from './screens/ForgotPassword';
 import NotificationsScreen from './screens/Notifications';
 import FavoritesScreen from './screens/Favorites';
 
@@ -39,7 +39,6 @@ const Feed = () => (
 const Profile = () => (
   <Stack.Navigator>
     <Stack.Screen name="Profile" component={ProfileScreen} />
-    <Stack.Screen name="ResetPassword" component={ResetPasswordScreen} />
     <Stack.Screen name="Notifications" component={NotificationsScreen} />
   </Stack.Navigator>
 );
@@ -65,9 +64,9 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(authFetched());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(authFetched());
+  // }, [dispatch]);
 
   const handleSignOut = ({navigation}: DrawerContentComponentProps) => () => {
     navigation.dispatch(DrawerActions.closeDrawer());
@@ -95,9 +94,16 @@ const App = () => {
             <Drawer.Screen name="Contacts" component={ContactsScreen} />
           </Drawer.Navigator>
         ) : (
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}>
             <Stack.Screen name="SignIn" component={SignInScreen} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPasswordScreen}
+            />
           </Stack.Navigator>
         )}
       </NavigationContainer>

@@ -2,7 +2,13 @@ Native feel while scrolling through infinite feed (feed is similar to one that F
 
 In-app purchases
 
+KeyboardAvoidingView
+
+floating-label input
+
 responsive views
+
+font scaling
 
 Forms
 

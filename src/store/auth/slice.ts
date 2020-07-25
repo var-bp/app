@@ -23,7 +23,7 @@ const authSlice = createSlice({
     },
     authFetchError(state, action) {
       state.isFetching = false;
-      state.data = {};
+      state.data = null;
       state.error = {
         status: action.payload.status,
         message: action.payload.message,

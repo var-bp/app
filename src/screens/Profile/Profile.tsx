@@ -1,9 +1,9 @@
-import React, {FunctionComponent} from 'react';
+import React, {FC} from 'react';
 import {Text, Button} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Container} from './Profile.styles';
 
-const Profile: FunctionComponent<StackScreenProps<any, any>> = ({
+const Profile: FC<StackScreenProps<any, any>> = ({
   navigation,
 }) => {
   return (
@@ -14,8 +14,8 @@ const Profile: FunctionComponent<StackScreenProps<any, any>> = ({
         title="Go to Notifications"
       />
       <Button
-        onPress={() => navigation.navigate('ResetPassword')}
-        title="Go to ResetPassword"
+        onPress={() => navigation.navigate('ForgotPassword')}
+        title="Go to ForgotPassword"
       />
     </Container>
   );
