@@ -1,5 +1,6 @@
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
+import {useNavigation} from '@react-navigation/native';
 import {
   Button,
   Label,
@@ -9,11 +10,36 @@ import {
   Icon,
 } from '../../../../shared';
 import {Black, Blue, Yellow} from '../../../../helpers/colors';
+import {RenderFn} from './Form.types';
 import {Container, User, Row} from './Form.styles';
 
 const Form = () => {
+  const navigation = useNavigation();
   const {control, handleSubmit, errors} = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const rules = {required: true};
+
+  const onSubmit = (data) => {};
+  const handleSignUp = () => {
+    navigation.navigate('SignUp');
+  };
+  const renderUserName = ({onChange, onBlur, value}: RenderFn) => (
+    <TextInput
+      onBlur={onBlur}
+      onChangeText={onChange}
+      value={value}
+      autoCompleteType="username"
+    />
+  );
+  const renderPassword = ({onChange, onBlur, value}: RenderFn) => (
+    <TextInput
+      onBlur={onBlur}
+      onChangeText={onChange}
+      value={value}
+      secureTextEntry
+      autoCompleteType="password"
+    />
+  );
 
   return (
     <Container>
@@ -24,35 +50,20 @@ const Form = () => {
         <Label>User name</Label>
         <Controller
           control={control}
-          render={({onChange, onBlur, value}) => (
-            <TextInput
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              autoCompleteType="username"
-            />
-          )}
+          render={renderUserName}
           name="firstName"
-          rules={{required: true}}
+          rules={rules}
           defaultValue=""
         />
         {errors.firstName && <RequiredText>Required</RequiredText>}
       </Row>
-      <Row height="90px">
+      <Row height="85px">
         <Label>Password</Label>
         <Controller
           control={control}
-          render={({onChange, onBlur, value}) => (
-            <TextInput
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              secureTextEntry
-              autoCompleteType="password"
-            />
-          )}
+          render={renderPassword}
           name="password"
-          rules={{required: true}}
+          rules={rules}
           defaultValue=""
         />
         {errors.firstName && <RequiredText>Required</RequiredText>}
@@ -61,15 +72,14 @@ const Form = () => {
         <Link onPress={() => {}}>Forgot Password?</Link>
       </Row>
       <Row marginBottom="35px">
-        <Button
-          backgroundColor={Blue[1]}
-          onPress={() => {
-            handleSubmit(onSubmit);
-          }}>
+        <Button backgroundColor={Blue[1]} onPress={handleSubmit(onSubmit)}>
           Login
         </Button>
       </Row>
-      <Button backgroundColor={Yellow[1]} color={Black[2]} onPress={() => {}}>
+      <Button
+        backgroundColor={Yellow[1]}
+        color={Black[2]}
+        onPress={handleSignUp}>
         No account yet? Signup now
       </Button>
     </Container>
