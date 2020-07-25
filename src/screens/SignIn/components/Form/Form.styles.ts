@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {View} from 'react-native';
+import {RowPT} from './Form.types';
 
 export const Container = styled(View)`
   flex: 1;
@@ -15,7 +16,7 @@ export const User = styled(View)`
   margin-bottom: 25px;
 `;
 
-export const Row = styled(View)`
+export const Row = styled(View)<RowPT>`
   ${({height}) =>
     height != null &&
     `

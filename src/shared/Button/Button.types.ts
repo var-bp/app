@@ -1,7 +1,7 @@
 import {TouchableOpacityProps, TextProps} from 'react-native';
 
 export interface ButtonPT extends TouchableOpacityProps {
-  title: string;
+  children: string;
   backgroundColor: string;
   color?: string;
   activeOpacity?: number;

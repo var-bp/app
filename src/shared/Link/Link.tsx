@@ -4,14 +4,14 @@ import {Blue} from '../../helpers/colors';
 import {Container, Text} from './Link.styles';
 
 const Link: FC<LinkPT> = ({
-  title,
+  children,
   onPress,
   color = Blue[1],
   activeOpacity = 0.7,
 }) => {
   return (
     <Container onPress={onPress} activeOpacity={activeOpacity}>
-      <Text color={color}>{title}</Text>
+      <Text color={color}>{children}</Text>
     </Container>
   );
 };

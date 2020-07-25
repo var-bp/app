@@ -4,7 +4,7 @@ import {White} from '../../helpers/colors';
 import {Container, Text} from './Button.styles';
 
 const Button: FC<ButtonPT> = ({
-  title,
+  children,
   onPress,
   backgroundColor,
   color = White[1],
@@ -15,7 +15,7 @@ const Button: FC<ButtonPT> = ({
       onPress={onPress}
       backgroundColor={backgroundColor}
       activeOpacity={activeOpacity}>
-      <Text color={color}>{title}</Text>
+      <Text color={color}>{children}</Text>
     </Container>
   );
 };

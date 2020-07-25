@@ -1,7 +1,7 @@
 import {TouchableOpacityProps, TextProps} from 'react-native';
 
 export interface LinkPT extends TouchableOpacityProps {
-  title: string;
+  children: string;
   color?: string;
   activeOpacity?: number;
 }

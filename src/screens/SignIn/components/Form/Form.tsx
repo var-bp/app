@@ -58,21 +58,20 @@ const Form = () => {
         {errors.firstName && <RequiredText>Required</RequiredText>}
       </Row>
       <Row marginBottom="40px" alignItems="flex-end">
-        <Link title="Forgot Password?" onPress={() => {}} />
+        <Link onPress={() => {}}>Forgot Password?</Link>
       </Row>
       <Row marginBottom="35px">
         <Button
-          title="Login"
           backgroundColor={Blue[1]}
-          onPress={handleSubmit(onSubmit)}
-        />
+          onPress={() => {
+            handleSubmit(onSubmit);
+          }}>
+          Login
+        </Button>
       </Row>
-      <Button
-        title="No account yet? Signup now"
-        backgroundColor={Yellow[1]}
-        color={Black[2]}
-        onPress={() => {}}
-      />
+      <Button backgroundColor={Yellow[1]} color={Black[2]} onPress={() => {}}>
+        No account yet? Signup now
+      </Button>
     </Container>
   );
 };
