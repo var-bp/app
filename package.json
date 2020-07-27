@@ -5,6 +5,9 @@
   "scripts": {
     "android": "yarn run android:emulator & ( sleep 30 && react-native run-android )",
     "android:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_3_API_30 -wipe-data",
+    "env:dev": "env NODE_ENV=development node envs/evns.config.js",
+    "env:prod": "env NODE_ENV=production node envs/evns.config.js",
+    "env:staging": "env NODE_ENV=staging node envs/evns.config.js",
     "ios": "yarn run ios:emulator:erase && react-native run-ios --simulator='iPhone 11'",
     "ios:emulator:erase": "xcrun simctl erase 578300FE-B96A-4B24-A763-E06D8E11EAEB",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",

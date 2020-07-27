@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -23,22 +23,29 @@ const Form = () => {
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   };
-  const renderUsername = ({onChange, onBlur, value}: RenderFn) => (
-    <TextInput
-      onBlur={onBlur}
-      onChangeText={onChange}
-      value={value}
-      autoCompleteType="username"
-    />
+  // TODO: investigate
+  const renderUsername = useCallback(
+    ({onChange, onBlur, value}: RenderFn) => (
+      <TextInput
+        onBlur={onBlur}
+        onChangeText={onChange}
+        value={value}
+        autoCompleteType="username"
+      />
+    ),
+    [],
   );
-  const renderPassword = ({onChange, onBlur, value}: RenderFn) => (
-    <TextInput
-      onBlur={onBlur}
-      onChangeText={onChange}
-      value={value}
-      secureTextEntry
-      autoCompleteType="password"
-    />
+  const renderPassword = useCallback(
+    ({onChange, onBlur, value}: RenderFn) => (
+      <TextInput
+        onBlur={onBlur}
+        onChangeText={onChange}
+        value={value}
+        secureTextEntry
+        autoCompleteType="password"
+      />
+    ),
+    [],
   );
 
   return (

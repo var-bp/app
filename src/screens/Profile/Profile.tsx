@@ -3,9 +3,7 @@ import {Text, Button} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Container} from './Profile.styles';
 
-const Profile: FC<StackScreenProps<any, any>> = ({
-  navigation,
-}) => {
+const Profile: FC<StackScreenProps<any, any>> = ({navigation}) => {
   return (
     <Container>
       <Text>Profile</Text>
