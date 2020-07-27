@@ -14,6 +14,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
 import {authFetched, resetState} from './store/auth/slice';
 import {State} from './store/types';
+import {IS_DEVELOPMENT} from '../env.json';
 import ContactsScreen from './screens/Contacts';
 import SignInScreen from './screens/SignIn';
 import SignUpScreen from './screens/SignUp';
@@ -64,9 +65,9 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authFetched());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(authFetched());
+  }, [dispatch]);
 
   const handleSignOut = ({navigation}: DrawerContentComponentProps) => () => {
     navigation.dispatch(DrawerActions.closeDrawer());
@@ -92,6 +93,12 @@ const App = () => {
             drawerContent={drawerContent}>
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Contacts" component={ContactsScreen} />
+            {IS_DEVELOPMENT && (
+              <Drawer.Screen
+                name="Storybook"
+                component={require('../storybook').default}
+              />
+            )}
           </Drawer.Navigator>
         ) : (
           <Stack.Navigator
