@@ -3,7 +3,7 @@ import {useForm, Controller} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 import {
   Button,
-  Label,
+  InputLabel,
   Link,
   TextInput,
   RequiredText,
@@ -23,7 +23,6 @@ const Form = () => {
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   };
-  // TODO: investigate
   const renderUsername = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
@@ -54,7 +53,7 @@ const Form = () => {
         <Icon name="user" size={100} color={Black[2]} />
       </User>
       <Row height="90px">
-        <Label>Username</Label>
+        <InputLabel>Username</InputLabel>
         <Controller
           control={control}
           render={renderUsername}
@@ -65,7 +64,7 @@ const Form = () => {
         {errors.username && <RequiredText>Required</RequiredText>}
       </Row>
       <Row height="85px">
-        <Label>Password</Label>
+        <InputLabel>Password</InputLabel>
         <Controller
           control={control}
           render={renderPassword}

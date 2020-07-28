@@ -1,11 +1,11 @@
 import React from 'react';
-import {Text} from 'react-native';
+import Form from './components/Form';
 import {Container} from './SignUp.styles';
 
 const SignUp = () => {
   return (
     <Container>
-      <Text>SignUp</Text>
+      <Form />
     </Container>
   );
 };

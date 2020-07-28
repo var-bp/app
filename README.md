@@ -10,6 +10,3 @@ https://medium.com/@rossbulat/react-native-form-management-an-introduction-cb360
 https://magento.github.io/pwa-studio/venia-pwa-concept/component/forgot-password/
 
 https://codingislove.com/optimize-react-native-flatlist-performance/
-
-https://medium.com/dooboolab/setup-storybook-with-react-native-typescript-project-774eea7a7719
-https://storybook.js.org/docs/guides/guide-react-native/
