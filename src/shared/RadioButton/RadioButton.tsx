@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {RadioButtonPT} from './RadioButton.types';
+import {Gray} from '../../helpers/colors';
 import {Pressable, Container, Text, Radio, Dot} from './RadioButton.styles';
 
 const RadioButton: FC<RadioButtonPT> = ({
@@ -18,10 +19,13 @@ const RadioButton: FC<RadioButtonPT> = ({
   return (
     <Pressable onPress={disabled ? undefined : onPressWrapper}>
       <Container>
-        <Radio borderColor={isChecked ? color : uncheckedColor}>
+        <Radio
+          borderColor={disabled ? Gray[4] : isChecked ? color : uncheckedColor}>
           {isChecked ? (
             <Dot
-              backgroundColor={isChecked ? color : uncheckedColor}
+              backgroundColor={
+                disabled ? Gray[4] : isChecked ? color : uncheckedColor
+              }
               scale={1}
             />
           ) : null}

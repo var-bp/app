@@ -2,10 +2,11 @@ import React, {FC, useState} from 'react';
 import RadioButton from '../RadioButton';
 import {Black, Yellow} from '../../helpers/colors';
 import {RadioGroupPT} from './RadioGroup.types';
-import {Container} from './RadioGroup.styles';
+import {Container, Offset} from './RadioGroup.styles';
 
 const RadioGroup: FC<RadioGroupPT> = ({
   group = [],
+  offsetLeft,
   defaultChecked,
   onSelect,
 }) => {
@@ -18,17 +19,18 @@ const RadioGroup: FC<RadioGroupPT> = ({
 
   return (
     <Container>
-      {group.map((item) => (
-        <RadioButton
-          key={item.label}
-          value={item.value}
-          label={item.label}
-          isChecked={item.value === value}
-          disabled={item.isDisabled}
-          uncheckedColor={Black[2]}
-          color={Yellow[1]}
-          onPress={onPress}
-        />
+      {group.map((item, i) => (
+        <Offset key={item.label} marginLeft={i === 0 ? 0 : offsetLeft}>
+          <RadioButton
+            value={item.value}
+            label={item.label}
+            isChecked={item.value === value}
+            disabled={item.isDisabled}
+            uncheckedColor={Black[2]}
+            color={Yellow[1]}
+            onPress={onPress}
+          />
+        </Offset>
       ))}
     </Container>
   );

@@ -154,14 +154,15 @@ const Form = () => {
         />
         {errors.retypePassword && <RequiredText>Required</RequiredText>}
       </Row>
-      <Row marginBottom="10px">
+      <Row marginBottom="40px">
         <RadioGroup
           group={RADIO_GROUP}
+          offsetLeft="35px"
           defaultChecked={RADIO_GROUP[0].value}
           onSelect={() => {}}
         />
       </Row>
-      <Row marginBottom="35px">
+      <Row marginBottom="40px">
         <Button
           backgroundColor={Yellow[1]}
           color={Black[2]}

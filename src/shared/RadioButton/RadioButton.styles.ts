@@ -9,12 +9,13 @@ import {Black} from '../../helpers/colors';
 import {FontFamily, FontWeight, FontSize, LineHeight} from '../../helpers/typo';
 import {RadioPT, DotPT} from './RadioButton.types';
 
-export const Pressable = styled(TouchableWithoutFeedback)``;
+export const Pressable = styled(TouchableWithoutFeedback)`
+  margin-left: 15px;
+`;
 
 export const Container = styled(View)`
   flex-direction: row;
   align-items: center;
-  padding: 8px 16px;
 `;
 
 export const Text = styled(RNText)`
@@ -28,18 +29,18 @@ export const Text = styled(RNText)`
 export const Radio = styled(Animated.View)<RadioPT>`
   align-items: center;
   justify-content: center;
-  height: 20px;
-  width: 20px;
-  border-radius: 10px;
-  margin: 8px;
+  height: 24px;
+  width: 24px;
+  border-radius: 12px;
+  margin-right: 8px;
   border-color: ${({borderColor}) => borderColor};
   border-width: 2px;
 `;
 
 export const Dot = styled(Animated.View)<DotPT>`
-  height: 10px;
-  width: 10px;
-  border-radius: 5px;
+  height: 12px;
+  width: 12px;
+  border-radius: 6px;
   background-color: ${({backgroundColor}) => backgroundColor};
   ${({scale}) => `transform: scale(${scale});`};
 `;
