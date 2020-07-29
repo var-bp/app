@@ -9,6 +9,7 @@ import {
   TextInput,
   RequiredText,
   Icon,
+  RadioGroup,
 } from '../../../../shared';
 import {Black, Yellow} from '../../../../helpers/colors';
 import {RenderFn} from './Form.types';
@@ -20,11 +21,25 @@ import {
   LoginText,
 } from './Form.styles';
 
+const RULES = {required: true};
+const RADIO_GROUP = [
+  {
+    value: 'male',
+    label: 'Male',
+    isChecked: true,
+    isDisabled: false,
+  },
+  {
+    value: 'female',
+    label: 'Female',
+    isChecked: true,
+    isDisabled: false,
+  },
+];
+
 const Form = () => {
   const navigation = useNavigation();
   const {control, handleSubmit, errors} = useForm();
-
-  const rules = {required: true};
 
   const onSubmit = (data) => {};
   const handleSignUp = () => {
@@ -90,7 +105,7 @@ const Form = () => {
           control={control}
           render={renderFirstName}
           name="firstName"
-          rules={rules}
+          rules={RULES}
           defaultValue=""
         />
         {errors.firstName && <RequiredText>Required</RequiredText>}
@@ -101,7 +116,7 @@ const Form = () => {
           control={control}
           render={renderLastName}
           name="lastName"
-          rules={rules}
+          rules={RULES}
           defaultValue=""
         />
         {errors.lastName && <RequiredText>Required</RequiredText>}
@@ -112,7 +127,7 @@ const Form = () => {
           control={control}
           render={renderEmail}
           name="email"
-          rules={rules}
+          rules={RULES}
           defaultValue=""
         />
         {errors.lastName && <RequiredText>Required</RequiredText>}
@@ -123,7 +138,7 @@ const Form = () => {
           control={control}
           render={renderPassword}
           name="password"
-          rules={rules}
+          rules={RULES}
           defaultValue=""
         />
         {errors.password && <RequiredText>Required</RequiredText>}
@@ -134,10 +149,17 @@ const Form = () => {
           control={control}
           render={renderRetypePassword}
           name="retypePassword"
-          rules={rules}
+          rules={RULES}
           defaultValue=""
         />
         {errors.retypePassword && <RequiredText>Required</RequiredText>}
+      </Row>
+      <Row marginBottom="10px">
+        <RadioGroup
+          group={RADIO_GROUP}
+          defaultChecked={RADIO_GROUP[0].value}
+          onSelect={() => {}}
+        />
       </Row>
       <Row marginBottom="35px">
         <Button
