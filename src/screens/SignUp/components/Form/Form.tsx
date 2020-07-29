@@ -43,7 +43,7 @@ const Form = () => {
 
   const onSubmit = (data) => {};
   const handleSignUp = () => {
-    handleSubmit(onSubmit);
+    navigation.navigate('SignIn');
   };
   const renderFirstName = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
@@ -173,7 +173,7 @@ const Form = () => {
       <LoginTextContainer>
         <LoginText>Already have an account?</LoginText>
         <Text> </Text>
-        <Link onPress={() => {}}>Login now</Link>
+        <Link onPress={handleSignUp}>Login now</Link>
       </LoginTextContainer>
     </Container>
   );

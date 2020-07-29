@@ -1,11 +1,15 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import Form from './components/Form';
-import {Container} from './SignUp.styles';
+import {Container, KeyboardAvoidingView} from './SignUp.styles';
 
 const SignUp = () => {
   return (
     <Container>
-      <Form />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <Form />
+      </KeyboardAvoidingView>
     </Container>
   );
 };
