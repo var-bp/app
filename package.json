@@ -3,8 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "yarn run android:emulator & ( sleep 30 && react-native run-android )",
-    "android:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_3_API_30 -wipe-data",
+    "android:phone": "yarn run android:phone:emulator & ( sleep 30 && react-native run-android )",
+    "android:tablet": "yarn run android:tablet:emulator & ( sleep 30 && react-native run-android )",
+    "android:phone:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_3_API_30 -wipe-data",
+    "android:tablet:emulator": "/Users/bopo/Library/Android/sdk/emulator/emulator -avd Pixel_C_API_30 -wipe-data",
     "env:dev": "env NODE_ENV=development node envs/evns.config.js",
     "env:prod": "env NODE_ENV=production node envs/evns.config.js",
     "env:staging": "env NODE_ENV=staging node envs/evns.config.js",

@@ -12,7 +12,6 @@ import {RowPT} from './Form.types';
 export const Container = styled(View)`
   flex: 1;
   justify-content: center;
-  align-self: center;
   max-width: 330px;
   min-width: 280px;
 `;

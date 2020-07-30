@@ -9,8 +9,14 @@ export const Container = styled(SafeAreaView)`
   background-color: ${White[1]};
 `;
 
+export const ScrollView = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    flex: 1,
+    alignItems: 'center',
+  },
+}))``;
+
 export const KeyboardAvoidingView = styled(RNKeyboardAvoidingView)`
   padding: ${SCREEN_CONTAINER_OFFSET};
   flex: 1;
-  justify-content: center;
 `;
