@@ -1,4 +1,4 @@
-import {ViewProps} from 'react-native';
+import {ViewProps, Animated} from 'react-native';
 
 export interface RadioButtonPT {
   value: string;
@@ -10,11 +10,8 @@ export interface RadioButtonPT {
   color: string;
 }
 
-export interface RadioPT extends ViewProps {
-  borderColor: string;
-}
+export interface RadioPT extends Animated.WithAnimatedValue<ViewProps> {}
 
-export interface DotPT extends ViewProps {
+export interface DotPT extends Animated.WithAnimatedValue<ViewProps> {
   backgroundColor: string;
-  scale: number;
 }

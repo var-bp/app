@@ -33,7 +33,6 @@ export const Radio = styled(Animated.View)<RadioPT>`
   width: 24px;
   border-radius: 12px;
   margin-right: 8px;
-  border-color: ${({borderColor}) => borderColor};
   border-width: 2px;
 `;
 
@@ -42,5 +41,4 @@ export const Dot = styled(Animated.View)<DotPT>`
   width: 12px;
   border-radius: 6px;
   background-color: ${({backgroundColor}) => backgroundColor};
-  ${({scale}) => `transform: scale(${scale});`};
 `;

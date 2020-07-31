@@ -11,7 +11,7 @@ export const Container = styled(SafeAreaView)`
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
   },
 }))``;
