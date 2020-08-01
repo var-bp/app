@@ -15,3 +15,8 @@ export interface RowPT extends ViewProps {
   marginBottom?: string;
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
 }
+
+export interface FormFields {
+  username: string;
+  password: string;
+}

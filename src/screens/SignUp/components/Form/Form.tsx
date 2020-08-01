@@ -1,6 +1,7 @@
-import React, {useCallback} from 'react';
-import {Text} from 'react-native';
+import React, {useRef, useCallback, useEffect} from 'react';
+import {Text, TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers';
 import {useNavigation} from '@react-navigation/native';
 import {
   Button,
@@ -12,7 +13,9 @@ import {
   RadioGroup,
 } from '../../../../shared';
 import {Black, Yellow} from '../../../../helpers/colors';
-import {RenderFn} from './Form.types';
+import {IS_DEVELOPMENT} from '../../../../../env.json';
+import {RenderFn, FormFields} from './Form.types';
+import schema from './Form.schema';
 import {
   Container,
   User,
@@ -21,7 +24,6 @@ import {
   LoginText,
 } from './Form.styles';
 
-const RULES = {required: true};
 const RADIO_GROUP = [
   {
     value: 'male',
@@ -38,33 +40,74 @@ const RADIO_GROUP = [
 ];
 
 const Form = () => {
-  const navigation = useNavigation();
-  const {control, handleSubmit, errors} = useForm();
+  const firstNameRef = useRef<RNTextInput>(null);
+  const lastNameRef = useRef<RNTextInput>(null);
+  const emailRef = useRef<RNTextInput>(null);
+  const passwordRef = useRef<RNTextInput>(null);
+  const retypePasswordRef = useRef<RNTextInput>(null);
 
-  const onSubmit = (data) => {};
+  const navigation = useNavigation();
+  const {register, control, handleSubmit, errors} = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: FormFields) => {
+    if (IS_DEVELOPMENT) {
+      console.log('SignUp onSubmit:', data);
+    }
+  };
   const handleSignUp = () => {
     navigation.navigate('SignIn');
   };
+  const handleFirstNameSubmitEditing = () => {
+    lastNameRef.current?.focus();
+  };
+  const handleLastNameSubmitEditing = () => {
+    emailRef.current?.focus();
+  };
+  const handleEmailSubmitEditing = () => {
+    passwordRef.current?.focus();
+  };
+  const handlePasswordSubmitEditing = () => {
+    retypePasswordRef.current?.focus();
+  };
   const renderFirstName = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
-      <TextInput onBlur={onBlur} onChangeText={onChange} value={value} />
+      <TextInput
+        ref={firstNameRef}
+        onBlur={onBlur}
+        onChangeText={onChange}
+        value={value}
+        returnKeyType="next"
+        onSubmitEditing={handleFirstNameSubmitEditing}
+      />
     ),
     [],
   );
   const renderLastName = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
-      <TextInput onBlur={onBlur} onChangeText={onChange} value={value} />
+      <TextInput
+        ref={lastNameRef}
+        onBlur={onBlur}
+        onChangeText={onChange}
+        value={value}
+        returnKeyType="next"
+        onSubmitEditing={handleLastNameSubmitEditing}
+      />
     ),
     [],
   );
   const renderEmail = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
+        ref={emailRef}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
         autoCompleteType="email"
         keyboardType="email-address"
+        returnKeyType="next"
+        onSubmitEditing={handleEmailSubmitEditing}
       />
     ),
     [],
@@ -72,11 +115,14 @@ const Form = () => {
   const renderPassword = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
+        ref={passwordRef}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
         secureTextEntry
         autoCompleteType="password"
+        returnKeyType="next"
+        onSubmitEditing={handlePasswordSubmitEditing}
       />
     ),
     [],
@@ -84,15 +130,25 @@ const Form = () => {
   const renderRetypePassword = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
+        ref={retypePasswordRef}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
         secureTextEntry
         autoCompleteType="password"
+        returnKeyType="done"
       />
     ),
     [],
   );
+
+  useEffect(() => {
+    register('firstName');
+    register('lastName');
+    register('email');
+    register('password');
+    register('retypePassword');
+  }, [register]);
 
   return (
     <Container>
@@ -105,10 +161,11 @@ const Form = () => {
           control={control}
           render={renderFirstName}
           name="firstName"
-          rules={RULES}
           defaultValue=""
         />
-        {errors.firstName && <RequiredText>Required</RequiredText>}
+        {errors.firstName?.message && (
+          <RequiredText>{errors.firstName.message}</RequiredText>
+        )}
       </Row>
       <Row height="85px">
         <InputLabel>Last name</InputLabel>
@@ -116,10 +173,11 @@ const Form = () => {
           control={control}
           render={renderLastName}
           name="lastName"
-          rules={RULES}
           defaultValue=""
         />
-        {errors.lastName && <RequiredText>Required</RequiredText>}
+        {errors.lastName?.message && (
+          <RequiredText>{errors.lastName.message}</RequiredText>
+        )}
       </Row>
       <Row height="85px">
         <InputLabel>Email</InputLabel>
@@ -127,10 +185,11 @@ const Form = () => {
           control={control}
           render={renderEmail}
           name="email"
-          rules={RULES}
           defaultValue=""
         />
-        {errors.lastName && <RequiredText>Required</RequiredText>}
+        {errors.email?.message && (
+          <RequiredText>{errors.email.message}</RequiredText>
+        )}
       </Row>
       <Row height="85px">
         <InputLabel>Password</InputLabel>
@@ -138,21 +197,23 @@ const Form = () => {
           control={control}
           render={renderPassword}
           name="password"
-          rules={RULES}
           defaultValue=""
         />
-        {errors.password && <RequiredText>Required</RequiredText>}
+        {errors.password?.message && (
+          <RequiredText>{errors.password.message}</RequiredText>
+        )}
       </Row>
-      <Row height="85px">
+      <Row height="90px">
         <InputLabel>Retype password</InputLabel>
         <Controller
           control={control}
           render={renderRetypePassword}
           name="retypePassword"
-          rules={RULES}
           defaultValue=""
         />
-        {errors.retypePassword && <RequiredText>Required</RequiredText>}
+        {errors.retypePassword?.message && (
+          <RequiredText>{errors.retypePassword.message}</RequiredText>
+        )}
       </Row>
       <Row marginBottom="40px">
         <RadioGroup

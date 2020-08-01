@@ -1,5 +1,7 @@
-import React, {useCallback} from 'react';
+import React, {useRef, useCallback, useEffect} from 'react';
+import {TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers';
 import {useNavigation} from '@react-navigation/native';
 import {
   Button,
@@ -10,26 +12,41 @@ import {
   Icon,
 } from '../../../../shared';
 import {Black, Blue, Yellow} from '../../../../helpers/colors';
-import {RenderFn} from './Form.types';
+import {IS_DEVELOPMENT} from '../../../../../env.json';
+import {RenderFn, FormFields} from './Form.types';
+import schema from './Form.schema';
 import {Container, User, Row} from './Form.styles';
 
 const Form = () => {
+  const usernameRef = useRef<RNTextInput>(null);
+  const passwordRef = useRef<RNTextInput>(null);
+
   const navigation = useNavigation();
-  const {control, handleSubmit, errors} = useForm();
+  const {register, control, handleSubmit, errors} = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const rules = {required: true};
-
-  const onSubmit = (data) => {};
+  const onSubmit = (data: FormFields) => {
+    if (IS_DEVELOPMENT) {
+      console.log('SignIn onSubmit:', data);
+    }
+  };
   const handleSignUp = () => {
     navigation.navigate('SignUp');
+  };
+  const handleUsernameSubmitEditing = () => {
+    passwordRef.current?.focus();
   };
   const renderUsername = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
+        ref={usernameRef}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
         autoCompleteType="username"
+        returnKeyType="next"
+        onSubmitEditing={handleUsernameSubmitEditing}
       />
     ),
     [],
@@ -37,15 +54,22 @@ const Form = () => {
   const renderPassword = useCallback(
     ({onChange, onBlur, value}: RenderFn) => (
       <TextInput
+        ref={passwordRef}
         onBlur={onBlur}
         onChangeText={onChange}
         value={value}
         secureTextEntry
         autoCompleteType="password"
+        returnKeyType="done"
       />
     ),
     [],
   );
+
+  useEffect(() => {
+    register('username');
+    register('password');
+  }, [register]);
 
   return (
     <Container>
@@ -58,10 +82,11 @@ const Form = () => {
           control={control}
           render={renderUsername}
           name="username"
-          rules={rules}
           defaultValue=""
         />
-        {errors.username && <RequiredText>Required</RequiredText>}
+        {errors.username?.message && (
+          <RequiredText>{errors.username.message}</RequiredText>
+        )}
       </Row>
       <Row height="85px">
         <InputLabel>Password</InputLabel>
@@ -69,10 +94,11 @@ const Form = () => {
           control={control}
           render={renderPassword}
           name="password"
-          rules={rules}
           defaultValue=""
         />
-        {errors.password && <RequiredText>Required</RequiredText>}
+        {errors.password?.message && (
+          <RequiredText>{errors.password?.message}</RequiredText>
+        )}
       </Row>
       <Row marginBottom="40px" alignItems="flex-end">
         <Link onPress={() => {}}>Forgot Password?</Link>
