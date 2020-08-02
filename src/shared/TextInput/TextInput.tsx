@@ -1,44 +1,70 @@
-import React, {useState, forwardRef} from 'react';
-import {TextInput as RNTextInput} from 'react-native';
+import React, {forwardRef, useRef} from 'react';
+import {TextInput as RNTextInput, Animated} from 'react-native';
+import {Gray, Blue} from 'helpers/colors';
 import {TextInputPT, OnBlurFn, OnFocusFn} from './TextInput.types';
-import {Input} from './TextInput.styles';
+import {InputWrapper, Input} from './TextInput.styles';
 
 const TextInput = forwardRef<RNTextInput, TextInputPT>(
   (
-    {onChangeText, onBlur, onFocus, placeholder, value, secureTextEntry},
+    {
+      onChangeText,
+      onBlur,
+      onFocus,
+      onSubmitEditing,
+      placeholder,
+      value,
+      keyboardType,
+      secureTextEntry,
+      autoCompleteType,
+      returnKeyType,
+    },
     ref,
   ) => {
-    const [isFocus, setIsFocus] = useState(false);
-    const [isBlur, setIsBlur] = useState(false);
+    const borderColorRef = useRef(new Animated.Value(0)).current;
+
+    const animate = (toValue: number, duration: number = 200) => {
+      Animated.timing(borderColorRef, {
+        toValue,
+        duration,
+        useNativeDriver: false,
+      }).start();
+    };
+
+    const interpolatedBorderColor = borderColorRef.interpolate({
+      inputRange: [0, 1],
+      outputRange: [Gray[4], Blue[3]],
+    });
 
     const handleFocus: OnFocusFn = (e) => {
-      setIsFocus(true);
-      setIsBlur(false);
+      animate(1);
       if (onFocus) {
         onFocus(e);
       }
     };
 
     const handleBlur: OnBlurFn = (e) => {
-      setIsFocus(false);
-      setIsBlur(true);
+      animate(0);
       if (onBlur) {
         onBlur(e);
       }
     };
 
     return (
-      <Input
-        ref={ref}
-        isFocus={isFocus}
-        isBlur={isBlur}
-        onChangeText={onChangeText}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        value={value}
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
-      />
+      <InputWrapper style={{borderBottomColor: interpolatedBorderColor}}>
+        <Input
+          ref={ref}
+          autoCompleteType={autoCompleteType}
+          returnKeyType={returnKeyType}
+          keyboardType={keyboardType}
+          onChangeText={onChangeText}
+          onSubmitEditing={onSubmitEditing}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          value={value}
+          placeholder={placeholder}
+          secureTextEntry={secureTextEntry}
+        />
+      </InputWrapper>
     );
   },
 );

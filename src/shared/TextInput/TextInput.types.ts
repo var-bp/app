@@ -2,6 +2,8 @@ import {
   NativeSyntheticEvent,
   TextInputFocusEventData,
   TextInputProps,
+  ViewProps,
+  Animated,
 } from 'react-native';
 
 export type OnBlurFn = (
@@ -18,7 +20,4 @@ export interface TextInputPT extends TextInputProps {
   onChangeText: OnChangeTextFn;
 }
 
-export interface InputPT extends TextInputPT {
-  isFocus?: boolean;
-  isBlur?: boolean;
-}
+export interface InputWrapperPT extends Animated.WithAnimatedValue<ViewProps> {}

@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers';
@@ -27,37 +27,9 @@ const Form = () => {
   const handleSignUp = () => {
     navigation.navigate('SignUp');
   };
-  const handleUsernameSubmitEditing = () => {
-    passwordRef.current?.focus();
+  const handleForgotPassword = () => {
+    navigation.navigate('ForgotPassword');
   };
-  const renderUsername = useCallback(
-    ({onChange, onBlur, value}: RenderFn) => (
-      <TextInput
-        ref={usernameRef}
-        onBlur={onBlur}
-        onChangeText={onChange}
-        value={value}
-        autoCompleteType="username"
-        returnKeyType="next"
-        onSubmitEditing={handleUsernameSubmitEditing}
-      />
-    ),
-    [],
-  );
-  const renderPassword = useCallback(
-    ({onChange, onBlur, value}: RenderFn) => (
-      <TextInput
-        ref={passwordRef}
-        onBlur={onBlur}
-        onChangeText={onChange}
-        value={value}
-        secureTextEntry
-        autoCompleteType="password"
-        returnKeyType="done"
-      />
-    ),
-    [],
-  );
 
   useEffect(() => {
     register('username');
@@ -73,7 +45,19 @@ const Form = () => {
         <InputLabel>Username</InputLabel>
         <Controller
           control={control}
-          render={renderUsername}
+          render={({onChange, onBlur, value}: RenderFn) => (
+            <TextInput
+              ref={usernameRef}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              autoCompleteType="username"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordRef.current?.focus();
+              }}
+            />
+          )}
           name="username"
           defaultValue=""
         />
@@ -85,7 +69,16 @@ const Form = () => {
         <InputLabel>Password</InputLabel>
         <Controller
           control={control}
-          render={renderPassword}
+          render={({onChange, onBlur, value}: RenderFn) => (
+            <TextInput
+              ref={passwordRef}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              secureTextEntry
+              autoCompleteType="password"
+            />
+          )}
           name="password"
           defaultValue=""
         />
@@ -94,7 +87,7 @@ const Form = () => {
         )}
       </Row>
       <Row marginBottom="40px" alignItems="flex-end">
-        <Link onPress={() => {}}>Forgot Password?</Link>
+        <Link onPress={handleForgotPassword}>Forgot Password?</Link>
       </Row>
       <Row marginBottom="35px">
         <Button backgroundColor={Blue[1]} onPress={handleSubmit(onSubmit)}>

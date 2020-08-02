@@ -84,8 +84,6 @@ const App = () => {
     );
   };
 
-  console.log('env:', IS_DEVELOPMENT);
-
   // FIXME: storybook for android
   return (
     <SafeAreaProvider>

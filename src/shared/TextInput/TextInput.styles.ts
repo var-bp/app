@@ -1,24 +1,20 @@
 import styled from 'styled-components/native';
-import {TextInput} from 'react-native';
+import {TextInput, Animated} from 'react-native';
 import {FontFamily, FontWeight, FontSize} from 'helpers/typo';
-import {Gray, White, Blue} from 'helpers/colors';
-import {InputPT} from './TextInput.types';
+import {Gray, White} from 'helpers/colors';
+import {InputWrapperPT} from './TextInput.types';
 
-export const Input = styled(TextInput)<InputPT>`
-  padding-top: 5px;
-  padding-bottom: 5px;
+export const InputWrapper = styled(Animated.View)<InputWrapperPT>`
   border-bottom-width: 1px;
   border-style: solid;
-  border-bottom-color: ${Gray[4]};
+`;
+
+export const Input = styled(TextInput)`
+  padding-top: 5px;
+  padding-bottom: 5px;
   font-family: ${FontFamily[FontWeight.Normal]};
   font-weight: ${FontWeight.Normal};
   font-size: ${FontSize.S};
   color: ${Gray[1]};
   background-color: ${White[1]};
-
-  ${({isFocus}) =>
-    isFocus &&
-    `
-    border-bottom-color: ${Blue[3]};
-  `}
 `;
