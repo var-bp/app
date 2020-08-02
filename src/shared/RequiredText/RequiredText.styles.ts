@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {Text} from 'react-native';
-import {Red} from '../../helpers/colors';
-import {FontFamily, FontWeight, FontSize, LineHeight} from '../../helpers/typo';
+import {Red} from 'helpers/colors';
+import {FontFamily, FontWeight, FontSize, LineHeight} from 'helpers/typo';
 
 export const Container = styled(Text)`
   margin-top: 1px;

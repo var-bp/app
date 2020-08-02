@@ -1,7 +1,7 @@
 import React, {FC, useRef, useEffect, useCallback} from 'react';
 import {Animated} from 'react-native';
+import {Gray} from 'helpers/colors';
 import {RadioButtonPT} from './RadioButton.types';
-import {Gray} from '../../helpers/colors';
 import {Pressable, Container, Text, Radio, Dot} from './RadioButton.styles';
 
 const RadioButton: FC<RadioButtonPT> = ({

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
+import {Blue} from 'helpers/colors';
 import {LinkPT} from './Link.types';
-import {Blue} from '../../helpers/colors';
 import {Container, Text} from './Link.styles';
 
 const Link: FC<LinkPT> = ({

@@ -12,19 +12,20 @@ import {
 } from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useSelector, useDispatch} from 'react-redux';
-import {authFetched, resetState} from './store/auth/slice';
-import {State} from './store/types';
+import {authFetched, resetState} from 'store/auth/slice';
+import {State} from 'store/types';
+import {IS_DEVELOPMENT} from 'env';
 // import {IS_DEVELOPMENT} from '../env.json';
-import ContactsScreen from './screens/Contacts';
-import SignInScreen from './screens/SignIn';
-import SignUpScreen from './screens/SignUp';
-import SettingsScreen from './screens/Settings';
-import FeedScreen from './screens/Feed';
-import DetailsScreen from './screens/Details';
-import ProfileScreen from './screens/Profile';
-import ForgotPasswordScreen from './screens/ForgotPassword';
-import NotificationsScreen from './screens/Notifications';
-import FavoritesScreen from './screens/Favorites';
+import ContactsScreen from 'screens/Contacts';
+import SignInScreen from 'screens/SignIn';
+import SignUpScreen from 'screens/SignUp';
+import SettingsScreen from 'screens/Settings';
+import FeedScreen from 'screens/Feed';
+import DetailsScreen from 'screens/Details';
+import ProfileScreen from 'screens/Profile';
+import ForgotPasswordScreen from 'screens/ForgotPassword';
+import NotificationsScreen from 'screens/Notifications';
+import FavoritesScreen from 'screens/Favorites';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,6 +83,8 @@ const App = () => {
       </DrawerContentScrollView>
     );
   };
+
+  console.log('env:', IS_DEVELOPMENT);
 
   // FIXME: storybook for android
   return (

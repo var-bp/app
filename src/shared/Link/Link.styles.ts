@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import {TouchableOpacity, Text as RNText} from 'react-native';
-import {FontFamily, FontWeight, FontSize, LineHeight} from '../../helpers/typo';
+import {FontFamily, FontWeight, FontSize, LineHeight} from 'helpers/typo';
 import {TextPT} from './Link.types';
 
 export const Container = styled(TouchableOpacity)``;

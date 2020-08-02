@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import {TextInput} from 'react-native';
+import {FontFamily, FontWeight, FontSize} from 'helpers/typo';
+import {Gray, White, Blue} from 'helpers/colors';
 import {InputPT} from './TextInput.types';
-import {FontFamily, FontWeight, FontSize} from '../../helpers/typo';
-import {Gray, White, Blue} from '../../helpers/colors';
 
 export const Input = styled(TextInput)<InputPT>`
   padding-top: 5px;

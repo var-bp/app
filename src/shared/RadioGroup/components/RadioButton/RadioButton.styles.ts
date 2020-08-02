@@ -5,8 +5,8 @@ import {
   Animated,
   View,
 } from 'react-native';
-import {Black} from '../../helpers/colors';
-import {FontFamily, FontWeight, FontSize, LineHeight} from '../../helpers/typo';
+import {Black} from 'helpers/colors';
+import {FontFamily, FontWeight, FontSize, LineHeight} from 'helpers/typo';
 import {RadioPT, DotPT} from './RadioButton.types';
 
 export const Pressable = styled(TouchableWithoutFeedback)`

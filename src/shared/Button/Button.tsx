@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
+import {White} from 'helpers/colors';
 import {ButtonPT} from './Button.types';
-import {White} from '../../helpers/colors';
 import {Container, Text} from './Button.styles';
 
 const Button: FC<ButtonPT> = ({

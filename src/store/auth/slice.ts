@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {AuthState} from '../types';
+import {AuthState} from 'store/types';
 
 export const initialState: AuthState = {
   isFetching: false,

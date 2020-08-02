@@ -11,9 +11,9 @@ import {
   RequiredText,
   Icon,
   RadioGroup,
-} from '../../../../shared';
-import {Black, Yellow} from '../../../../helpers/colors';
-import {IS_DEVELOPMENT} from '../../../../../env.json';
+} from 'shared';
+import {Black, Yellow} from 'helpers/colors';
+import {IS_DEVELOPMENT} from 'env';
 import {RenderFn, FormFields} from './Form.types';
 import schema from './Form.schema';
 import {

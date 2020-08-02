@@ -3,16 +3,9 @@ import {TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers';
 import {useNavigation} from '@react-navigation/native';
-import {
-  Button,
-  InputLabel,
-  Link,
-  TextInput,
-  RequiredText,
-  Icon,
-} from '../../../../shared';
-import {Black, Blue, Yellow} from '../../../../helpers/colors';
-import {IS_DEVELOPMENT} from '../../../../../env.json';
+import {Button, InputLabel, Link, TextInput, RequiredText, Icon} from 'shared';
+import {Black, Blue, Yellow} from 'helpers/colors';
+import {IS_DEVELOPMENT} from 'env';
 import {RenderFn, FormFields} from './Form.types';
 import schema from './Form.schema';
 import {Container, User, Row} from './Form.styles';

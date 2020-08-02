@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import RadioButton from '../RadioButton';
-import {Black, Yellow} from '../../helpers/colors';
+import RadioButton from './components/RadioButton';
+import {Black, Yellow} from 'helpers/colors';
 import {RadioGroupPT} from './RadioGroup.types';
 import {Container, Offset} from './RadioGroup.styles';
 

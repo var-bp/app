@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {User, Form} from './Icons';
+import {User, Form} from './components/Icons';
 import {PropTypes} from './Icon.types';
 
 // SVG 2 JSX https://svg2jsx.com/
