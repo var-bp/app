@@ -1,8 +1,9 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useCallback} from 'react';
 import {TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Button, InputLabel, Link, TextInput, RequiredText, Icon} from 'shared';
 import {Black, Blue, Yellow} from 'helpers/colors';
 import {IS_DEVELOPMENT} from 'env';
@@ -10,19 +11,30 @@ import {RenderFn, FormFields} from './Form.types';
 import schema from './Form.schema';
 import {Container, User, Row} from './Form.styles';
 
+const GET_FROM_TEMP_STORAGE = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@TEMP_STORAGE');
+    return value != null ? JSON.parse(value) : null;
+  } catch (e) {
+    // error reading value
+  }
+};
+
 const Form = () => {
   const usernameRef = useRef<RNTextInput>(null);
   const passwordRef = useRef<RNTextInput>(null);
 
   const navigation = useNavigation();
-  const {register, control, handleSubmit, errors} = useForm({
+  const {register, control, handleSubmit, reset, errors} = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormFields) => {
+  const onSubmit = async (data: FormFields) => {
     if (IS_DEVELOPMENT) {
       console.log('SignIn onSubmit:', data);
     }
+    const {username, password} = await GET_FROM_TEMP_STORAGE();
+    // TODO: set custom error
   };
   const handleSignUp = () => {
     navigation.navigate('SignUp');
@@ -35,6 +47,12 @@ const Form = () => {
     register('username');
     register('password');
   }, [register]);
+
+  useFocusEffect(
+    useCallback(() => {
+      reset();
+    }, [reset]),
+  );
 
   return (
     <Container>
@@ -53,6 +71,7 @@ const Form = () => {
               value={value}
               autoCompleteType="username"
               returnKeyType="next"
+              autoCapitalize="none"
               onSubmitEditing={() => {
                 passwordRef.current?.focus();
               }}
@@ -76,6 +95,7 @@ const Form = () => {
               onChangeText={onChange}
               value={value}
               secureTextEntry
+              autoCapitalize="none"
               autoCompleteType="password"
             />
           )}

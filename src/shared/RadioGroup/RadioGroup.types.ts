@@ -10,7 +10,7 @@ export interface GroupItem {
 export interface RadioGroupPT {
   group: Array<GroupItem>;
   offsetLeft: string;
-  defaultChecked?: string;
+  value?: string;
   onSelect(value: string): void;
 }
 

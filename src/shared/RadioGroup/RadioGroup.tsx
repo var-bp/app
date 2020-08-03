@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import RadioButton from './components/RadioButton';
 import {Black, Yellow} from 'helpers/colors';
 import {RadioGroupPT} from './RadioGroup.types';
@@ -7,16 +7,9 @@ import {Container, Offset} from './RadioGroup.styles';
 const RadioGroup: FC<RadioGroupPT> = ({
   group = [],
   offsetLeft,
-  defaultChecked,
+  value,
   onSelect,
 }) => {
-  const [value, setValue] = useState<string | undefined>(defaultChecked);
-
-  const onPress = (v: string) => {
-    setValue(v);
-    onSelect(v);
-  };
-
   return (
     <Container>
       {group.map((item, i) => (
@@ -28,7 +21,7 @@ const RadioGroup: FC<RadioGroupPT> = ({
             disabled={item.isDisabled}
             uncheckedColor={Black[2]}
             color={Yellow[1]}
-            onPress={onPress}
+            onPress={onSelect}
           />
         </Offset>
       ))}

@@ -1,8 +1,9 @@
-import React, {useRef, useEffect} from 'react';
-import {Text, TextInput as RNTextInput} from 'react-native';
+import React, {useRef, useEffect, useCallback} from 'react';
+import {Text, TextInput as RNTextInput, Keyboard} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Button,
   InputLabel,
@@ -39,14 +40,23 @@ const RADIO_GROUP = [
   },
 ];
 
+const SEND_TO_TEMP_STORAGE = async (value: object) => {
+  try {
+    await AsyncStorage.setItem('@TEMP_STORAGE', JSON.stringify(value));
+  } catch (e) {
+    // saving error
+  }
+};
+
 const Form = () => {
+  const firstNameRef = useRef<RNTextInput>(null);
   const lastNameRef = useRef<RNTextInput>(null);
   const emailRef = useRef<RNTextInput>(null);
   const passwordRef = useRef<RNTextInput>(null);
   const retypePasswordRef = useRef<RNTextInput>(null);
 
   const navigation = useNavigation();
-  const {register, control, handleSubmit, errors} = useForm({
+  const {register, control, handleSubmit, reset, errors} = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -54,12 +64,16 @@ const Form = () => {
     if (IS_DEVELOPMENT) {
       console.log('SignUp onSubmit:', data);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {retypePassword, ...rest} = data;
+    SEND_TO_TEMP_STORAGE(rest);
   };
   const handleSignUp = () => {
     navigation.navigate('SignIn');
   };
 
   useEffect(() => {
+    register('username');
     register('firstName');
     register('lastName');
     register('email');
@@ -67,17 +81,52 @@ const Form = () => {
     register('retypePassword');
   }, [register]);
 
+  useFocusEffect(
+    useCallback(() => {
+      // Do something when the screen is focused
+      reset();
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [reset]),
+  );
+
   return (
     <Container>
       <User>
         <Icon name="form" size={100} color={Black[2]} />
       </User>
       <Row height="90px">
+        <InputLabel>Username</InputLabel>
+        <Controller
+          control={control}
+          render={({onChange, onBlur, value}: RenderFn) => (
+            <TextInput
+              returnKeyType="next"
+              autoCapitalize="none"
+              onSubmitEditing={() => {
+                firstNameRef.current?.focus();
+              }}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+          name="username"
+          defaultValue=""
+        />
+        {errors.username?.message && (
+          <RequiredText>{errors.username.message}</RequiredText>
+        )}
+      </Row>
+      <Row height="90px">
         <InputLabel>First name</InputLabel>
         <Controller
           control={control}
           render={({onChange, onBlur, value}: RenderFn) => (
             <TextInput
+              ref={firstNameRef}
               returnKeyType="next"
               onSubmitEditing={() => {
                 lastNameRef.current?.focus();
@@ -127,6 +176,7 @@ const Form = () => {
               autoCompleteType="email"
               keyboardType="email-address"
               returnKeyType="next"
+              autoCapitalize="none"
               onSubmitEditing={() => {
                 passwordRef.current?.focus();
               }}
@@ -152,7 +202,9 @@ const Form = () => {
               secureTextEntry
               autoCompleteType="password"
               returnKeyType="next"
+              autoCapitalize="none"
               onSubmitEditing={() => {
+                Keyboard.dismiss(); // disable yellow highlights with "Strong Password" text, iOS
                 retypePasswordRef.current?.focus();
               }}
               onBlur={onBlur}
@@ -176,6 +228,7 @@ const Form = () => {
               ref={retypePasswordRef}
               secureTextEntry
               autoCompleteType="password"
+              autoCapitalize="none"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
@@ -189,11 +242,18 @@ const Form = () => {
         )}
       </Row>
       <Row marginBottom="40px">
-        <RadioGroup
-          group={RADIO_GROUP}
-          offsetLeft="35px"
-          defaultChecked={RADIO_GROUP[0].value}
-          onSelect={() => {}}
+        <Controller
+          control={control}
+          render={({onChange, value}: RenderFn) => (
+            <RadioGroup
+              group={RADIO_GROUP}
+              offsetLeft="35px"
+              value={value}
+              onSelect={onChange}
+            />
+          )}
+          name="gender"
+          defaultValue={RADIO_GROUP[0].value}
         />
       </Row>
       <Row marginBottom="40px">

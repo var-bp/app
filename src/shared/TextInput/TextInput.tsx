@@ -16,6 +16,7 @@ const TextInput = forwardRef<RNTextInput, TextInputPT>(
       keyboardType,
       secureTextEntry,
       autoCompleteType,
+      autoCapitalize,
       returnKeyType,
     },
     ref,
@@ -62,6 +63,7 @@ const TextInput = forwardRef<RNTextInput, TextInputPT>(
           onFocus={handleFocus}
           value={value}
           placeholder={placeholder}
+          autoCapitalize={autoCapitalize}
           secureTextEntry={secureTextEntry}
         />
       </InputWrapper>
