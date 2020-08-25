@@ -1,8 +1,12 @@
+Fake server https://miragejs.com/
+
 Native feel while scrolling through infinite feed (feed is similar to one that FB has)
 
 In-app purchases
 
 responsive views
+
+Dark mode
 
 font scaling
 
@@ -16,6 +20,14 @@ Deep linking
 
 Analytics and Crash reporting system (like GA and Crashlytics)
 
+Network interfaces (normalizr ?)
+
+Errors https://github.com/bvaughn/react-error-boundary , https://medium.com/@rossbulat/react-native-working-with-error-boundaries-2ac213977383
+
+Documentation
+
+State/Redux documentation/visualization
+
 SQLite or some other DB/Storage solution
 
 Native like navigation between screens
@@ -26,7 +38,7 @@ Geolocation
 
 Firebase
 
-Tests
+Tests, Detox
 
 
 https://github.com/prscX/awesome-react-native-native-modules
