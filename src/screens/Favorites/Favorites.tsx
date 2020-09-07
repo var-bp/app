@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {Text, Button} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Container} from './Favorites.styles';
 
-const Favorites: FC<StackScreenProps<any, any>> = ({navigation}) => {
+const Favorites = ({navigation}: StackScreenProps<any, any>) => {
   return (
     <Container>
       <Text>Favorites</Text>

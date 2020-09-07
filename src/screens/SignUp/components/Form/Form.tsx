@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useCallback} from 'react';
-import {Text, TextInput as RNTextInput, Keyboard} from 'react-native';
+import {Text, TextInput as RNTextInput} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
@@ -60,13 +60,14 @@ const Form = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormFields) => {
+  const onSubmit = async (data: FormFields) => {
     if (IS_DEVELOPMENT) {
       console.log('SignUp onSubmit:', data);
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {retypePassword, ...rest} = data;
-    SEND_TO_TEMP_STORAGE(rest);
+    await SEND_TO_TEMP_STORAGE(rest);
+    navigation.navigate('SignIn');
   };
   const handleSignUp = () => {
     navigation.navigate('SignIn');
@@ -204,7 +205,6 @@ const Form = () => {
               returnKeyType="next"
               autoCapitalize="none"
               onSubmitEditing={() => {
-                Keyboard.dismiss(); // disable yellow highlights with "Strong Password" text, iOS
                 retypePasswordRef.current?.focus();
               }}
               onBlur={onBlur}
@@ -228,6 +228,7 @@ const Form = () => {
               ref={retypePasswordRef}
               secureTextEntry
               autoCompleteType="password"
+              returnKeyType="done"
               autoCapitalize="none"
               onBlur={onBlur}
               onChangeText={onChange}

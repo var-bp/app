@@ -26,8 +26,6 @@ Errors https://github.com/bvaughn/react-error-boundary , https://medium.com/@ros
 
 Documentation
 
-State/Redux documentation/visualization
-
 SQLite or some other DB/Storage solution
 
 Native like navigation between screens

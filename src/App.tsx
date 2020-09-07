@@ -66,9 +66,9 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authFetched());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(authFetched());
+  }, [dispatch]);
 
   const handleSignOut = ({navigation}: DrawerContentComponentProps) => () => {
     navigation.dispatch(DrawerActions.closeDrawer());

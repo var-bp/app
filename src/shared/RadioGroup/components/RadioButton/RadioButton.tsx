@@ -1,4 +1,4 @@
-import React, {FC, useRef, useEffect, useCallback} from 'react';
+import React, { useRef, useEffect, useCallback} from 'react';
 import {Animated} from 'react-native';
 import {Gray} from 'helpers/colors';
 import {RadioButtonPT} from './RadioButton.types';
@@ -12,7 +12,7 @@ const RadioButton: FC<RadioButtonPT> = ({
   onPress,
   uncheckedColor,
   color,
-}) => {
+}: RadioButtonPT) => {
   const animatedValue: number = isChecked ? 1 : 0;
 
   const scaleRef = useRef(new Animated.Value(animatedValue)).current;

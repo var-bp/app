@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {User, Form} from './components/Icons';
 import {PropTypes} from './Icon.types';
 
 // SVG 2 JSX https://svg2jsx.com/
-const Icon: FC<PropTypes> = ({name, size, color}) => {
+const Icon = ({name, size, color}: PropTypes) => {
   switch (name) {
     case 'user':
       return <User size={size} color={color} />;

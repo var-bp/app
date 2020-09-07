@@ -1,8 +1,8 @@
-import React, {FC} from 'react';
+import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import {PropTypes} from './types';
 
-const Form: FC<PropTypes> = ({size, color}) => {
+const Form = ({size, color}: PropTypes) => {
   return (
     <Svg width={`${size}`} height={`${size}`} viewBox="0 0 512 512">
       <Path

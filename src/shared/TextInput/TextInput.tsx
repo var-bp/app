@@ -18,6 +18,7 @@ const TextInput = forwardRef<RNTextInput, TextInputPT>(
       autoCompleteType,
       autoCapitalize,
       returnKeyType,
+      blurOnSubmit,
     },
     ref,
   ) => {
@@ -61,6 +62,7 @@ const TextInput = forwardRef<RNTextInput, TextInputPT>(
           onSubmitEditing={onSubmitEditing}
           onBlur={handleBlur}
           onFocus={handleFocus}
+          blurOnSubmit={blurOnSubmit}
           value={value}
           placeholder={placeholder}
           autoCapitalize={autoCapitalize}

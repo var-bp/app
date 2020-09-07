@@ -25,7 +25,7 @@ const Form = () => {
   const passwordRef = useRef<RNTextInput>(null);
 
   const navigation = useNavigation();
-  const {register, control, handleSubmit, reset, errors} = useForm({
+  const {register, control, handleSubmit, getValues, setError, reset, errors} = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -33,8 +33,20 @@ const Form = () => {
     if (IS_DEVELOPMENT) {
       console.log('SignIn onSubmit:', data);
     }
-    const {username, password} = await GET_FROM_TEMP_STORAGE();
-    // TODO: set custom error
+    const tempStorage = await GET_FROM_TEMP_STORAGE();
+    const values = getValues();
+    if (values.username !== tempStorage.username) {
+      setError("username", {
+        type: "manual",
+        message: "Wrong username or password",
+      });
+    }
+    if (values.password !== tempStorage.password) {
+      setError("password", {
+        type: "manual",
+        message: "Wrong username or password",
+      });
+    }
   };
   const handleSignUp = () => {
     navigation.navigate('SignUp');
@@ -95,6 +107,7 @@ const Form = () => {
               onChangeText={onChange}
               value={value}
               secureTextEntry
+              returnKeyType="done"
               autoCapitalize="none"
               autoCompleteType="password"
             />

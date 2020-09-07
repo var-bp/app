@@ -1,15 +1,15 @@
-import React, {FC} from 'react';
+import React from 'react';
 import RadioButton from './components/RadioButton';
 import {Black, Yellow} from 'helpers/colors';
 import {RadioGroupPT} from './RadioGroup.types';
 import {Container, Offset} from './RadioGroup.styles';
 
-const RadioGroup: FC<RadioGroupPT> = ({
+const RadioGroup = ({
   group = [],
   offsetLeft,
   value,
   onSelect,
-}) => {
+}: RadioGroupPT) => {
   return (
     <Container>
       {group.map((item, i) => (

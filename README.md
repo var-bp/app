@@ -2,6 +2,7 @@
 
 react-native with native
 
+https://fettblog.eu/typescript-react-why-i-dont-use-react-fc/
 
 https://medium.com/@rossbulat/react-native-form-management-an-introduction-cb360187d053
 
@@ -15,7 +16,6 @@ https://blog.swmansion.com/controlling-and-customizing-animations-in-reanimated-
 
 
 react native library:
-https://medium.com/call-stack/building-component-libraries-for-react-native-apps-41351d7d2ae4
 https://blog.theodo.com/2020/04/react-native-bridge-module/
 
 https://medium.com/wix-engineering/creating-a-native-module-in-react-native-93bab0123e46

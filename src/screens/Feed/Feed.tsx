@@ -1,9 +1,10 @@
-import React, {FC} from 'react';
-import {Button} from 'react-native';
+import React from 'react';
+import {Button, NativeModules} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {Container, Text} from './Feed.styles';
 
-const Feed: FC<StackScreenProps<any, any>> = ({navigation}) => {
+const Feed = ({navigation}: StackScreenProps<any, any>) => {
+  console.log('NativeModules:', NativeModules.ToastExample);
   return (
     <Container>
       <Text>Feed</Text>
